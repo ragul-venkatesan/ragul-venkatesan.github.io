@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ragul Venkatesan</title>
+    <link rel="icon" type="image/png" href="profile_photo.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <style>
+        /* Professional Software Engineer Color Palette */
+        :root {
+            /* Primary Colors - Professional & Trustworthy */
+            --primary-dark: #1e293b;
+            /* Deep slate blue - main headings, sidebar */
+            --primary: #334155;
+            /* Medium slate - section titles */
+            --primary-light: #475569;
+            /* Light slate - borders, accents */
+
+            /* Accent Colors - Innovation & Technology */
+            --accent-primary: #3b82f6;
+            /* Bright blue - links, highlights */
+            --accent-secondary: #06b6d4;
+            /* Cyan - hover states, active elements */
+            --accent-tertiary: #8b5cf6;
+            /* Purple - special highlights */
+
+            /* Neutral Colors - Readability & Balance */
+            --neutral-100: #ffffff;
+            /* Pure white - backgrounds */
+            --neutral-200: #f8fafc;
+            /* Very light gray - page background */
+            --neutral-300: #e2e8f0;
+            /* Light gray - borders, dividers */
+            --neutral-400: #94a3b8;
+            /* Medium gray - secondary text */
+            --neutral-600: #475569;
+            /* Dark gray - body text */
+            --neutral-800: #1e293b;
+            /* Very dark - headings */
+
+            /* Semantic Colors - Status & Feedback */
+            --success: #10b981;
+            /* Green - achievements, positive */
+            --warning: #f59e0b;
+            /* Amber - attention, skills */
+            --info: #3b82f6;
+            /* Blue - information, links */
+
+            /* Interactive States */
+            --hover-light: #dbeafe;
+            /* Light blue - hover backgrounds */
+            --active-dark: #1e40af;
+            /* Dark blue - active states */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--neutral-200);
+            color: var(--neutral-800);
+            margin: 0;
+            padding: 0.1rem;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .resume-container {
+            background: var(--neutral-100);
+            box-shadow: 0 8px 32px rgba(30, 41, 59, 0.12);
+            border-radius: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--neutral-100);
+            padding: 2rem;
+            width: 20%;
+            flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem 3rem;
+            margin-left: 25%;
+            position: relative;
+        }
+
+        .section-nav {
+            position: fixed;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--neutral-200);
+            border-radius: 0;
+            padding: 1rem 0.5rem;
+            box-shadow: 0 8px 32px rgba(61, 68, 80, 0.2);
+            z-index: 1000;
+            transition: right 0.3s ease;
+        }
+
+        .section-nav.visible {
+            right: 0;
+        }
+
+        /* Hover area for right edge detection */
+        .nav-hover-area {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 100vh;
+            z-index: 999;
+        }
+
+        .nav-hover-area:hover+.section-nav,
+        .section-nav:hover {
+            right: 0;
+        }
+
+
+
+        .nav-item {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 0.5rem 0;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--neutral-100);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item .material-icons {
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
+        .nav-item:hover {
+            background: var(--neutral-100);
+            color: var(--accent-primary);
+            transform: scale(1.1);
+            border-color: var(--accent-primary);
+        }
+
+        .nav-item.active {
+            background: var(--neutral-100);
+            color: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 0;
+            background: var(--hover-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-dark);
+            font-size: 3rem;
+            font-weight: bold;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--neutral-100);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+        }
+
+        .contact-info {
+            text-align: center;
+        }
+
+        .contact-info h1 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem 0;
+            color: white;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .social-links a {
+            margin: 0 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links .material-icons {
+            font-size: 1.1rem;
+            vertical-align: middle;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-secondary);
+        }
+
+        .contact-info p .material-icons {
+            margin-right: 0.3rem;
+            color: var(--accent-secondary);
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
+        section {
+            margin-bottom: 1.7rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--neutral-300);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .main-content h2 {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            border-left: 5px solid var(--accent-primary);
+            padding-left: 0.7rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--blue-dark);
+        }
+
+        .subheading {
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--accent-primary);
+        }
+
+        .text-muted {
+            color: var(--neutral-400);
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skills-list li {
+            background: var(--hover-light);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.7rem;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid var(--neutral-300);
+        }
+
+        .experience-item,
+        .education-item,
+        .certification-item,
+        .project-item {
+            margin-bottom: 1rem;
+        }
+
+        .date-range {
+            color: var(--blue-medium);
+            font-size: 0.9rem;
+        }
+
+        .description {
+            margin-top: 0.3rem;
+            font-size: 1rem;
+            color: var(--blue-dark);
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1.5rem;
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+                margin-left: 0;
+            }
+
+            .section-nav {
+                position: fixed;
+                right: -50px;
+                bottom: 1rem;
+                top: auto;
+                transform: none;
+                border-radius: 0;
+                padding: 0.5rem;
+                transition: right 0.3s ease;
+            }
+
+            .section-nav.visible {
+                right: 0;
+            }
+
+            /* Mobile hover area */
+            .nav-hover-area {
+                width: 15px;
+            }
+
+            .nav-item {
+                width: 35px;
+                height: 35px;
+                margin: 0.3rem 0;
+                font-size: 1rem;
+                border-radius: 0;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            .contact-info h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .profile-photo {
+                width: 90px;
+                height: 90px;
+                font-size: 2.4rem;
+                border-radius: 0;
+            }
+
+            .contact-info h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+
+            .resume-container {
+                flex-direction: column !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                min-height: auto !important;
+            }
+
+            .sidebar {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                background: white !important;
+                color: black !important;
+                padding: 1rem !important;
+                margin-bottom: 1rem;
+                border-bottom: 2px solid #333;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 1.5rem !important;
+            }
+
+            .sidebar header {
+                display: flex !important;
+                flex-direction: row !important;
+                width: 100% !important;
+                align-items: flex-start !important;
+                gap: 1.5rem !important;
+            }
+
+            .sidebar .profile-photo {
+                width: 30% !important;
+                max-width: 120px !important;
+                height: auto !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: flex-start !important;
+            }
+
+            .sidebar .profile-photo img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 120px !important;
+                max-height: 120px !important;
+                object-fit: contain !important;
+            }
+
+            .sidebar .contact-info {
+                width: 70% !important;
+                text-align: left !important;
+                flex: 1 !important;
+            }
+
+            .sidebar .contact-info h1 {
+                color: black !important;
+                font-size: 1.6rem !important;
+                margin-bottom: 0.3rem !important;
+            }
+
+            .sidebar .contact-info h3 {
+                color: #666 !important;
+                font-size: 1rem !important;
+                margin-bottom: 0.3rem !important;
+                font-style: italic !important;
+            }
+
+            .sidebar .contact-info p {
+                color: #333 !important;
+                margin: 0.2rem 0 !important;
+                font-size: 0.9rem !important;
+            }
+
+            .sidebar .social-links {
+                margin-top: 0.8rem !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                gap: 1rem !important;
+                flex-wrap: wrap !important;
+            }
+
+            .sidebar .social-links a {
+                color: #333 !important;
+                font-size: 0.8rem !important;
+                text-decoration: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 0.2rem !important;
+            }
+
+            .sidebar .social-links a img {
+                display: none !important;
+            }
+
+            .sidebar .social-links a::before {
+                content: attr(aria-label) !important;
+                font-weight: 500 !important;
+            }
+
+            .sidebar .social-links a[aria-label*="LinkedIn"]::before {
+                content: "LinkedIn" !important;
+            }
+
+            .sidebar .social-links a[aria-label*="GitHub"]::before {
+                content: "GitHub" !important;
+            }
+
+            .sidebar .social-links a[aria-label*="LeetCode"]::before {
+                content: "LeetCode" !important;
+            }
+
+            .sidebar .social-links a[aria-label*="HackerRank"]::before {
+                content: "HackerRank" !important;
+            }
+
+            .sidebar .social-links p {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 1rem !important;
+            }
+
+            .section-nav {
+                display: none !important;
+            }
+
+            .nav-hover-area {
+                display: none !important;
+            }
+
+            section {
+                page-break-inside: avoid;
+                margin-bottom: 1rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+
+            .main-content h2 {
+                color: black !important;
+                font-size: 1.3rem !important;
+                border-left: 3px solid #333 !important;
+                padding-left: 0.5rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            h3 {
+                color: black !important;
+                font-size: 1.1rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+
+            .subheading {
+                color: #666 !important;
+                font-size: 0.9rem !important;
+            }
+
+            .description {
+                color: #333 !important;
+                font-size: 0.9rem !important;
+            }
+
+            .skills-list {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 0.3rem !important;
+                justify-content: flex-start !important;
+            }
+
+            .skills-list li {
+                background: #f5f5f5 !important;
+                color: black !important;
+                border: 1px solid #ccc !important;
+                font-size: 0.8rem !important;
+                padding: 0.2rem 0.5rem !important;
+            }
+
+            .text-muted {
+                color: #666 !important;
+            }
+
+            /* Ensure proper page breaks */
+            .experience-item,
+            .education-item,
+            .project-item {
+                page-break-inside: avoid;
+                margin-bottom: 0.8rem !important;
+            }
+
+            /* Hide any elements that shouldn't print */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Optimize spacing for print */
+            .sidebar .contact-info p .material-icons {
+                display: none !important;
+            }
+
+            .sidebar .contact-info p {
+                padding-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="resume-container" role="main" aria-label="Resume">
+        <div class="sidebar">
+            <header>
+                <div class="profile-photo" aria-label="Profile photo">
+                    <img src="profile_photo.png"
+                        alt="Ragul's Profile Photo">
+                </div>
+                <div class="contact-info">
+                    <h2>Ragul Venkatesan</h2>
+                    <h4>Call me Ragul</h4>
+                    <p>Senior Software Engineer</p>
+                    <p><span class="material-icons">mail</span> ragulvenkat2001@gmail.com</p>
+                    <p><span class="material-icons">phone</span> +91 9514559558</p>
+                    <div class="social-links" aria-label="Social media links">
+                        <a href="https://www.linkedin.com/in/ragul-venkat-1422001/" aria-label="LinkedIn profile"
+                            target="_blank" rel="noopener"><img src="LinkedIn_logo.svg" alt="LinkedIn" width="120" height="40"></a>
+                        <p></p>
+                        <a href="https://github.com/ragul-venkatesan" aria-label="GitHub profile" target="_blank"
+                            rel="noopener"><img src="github-mark-white.png" alt="GitHub" width="25" height="25"><img src="GitHub_Logo_White.png" alt="GitHub name" width="90" height="30"></a>
+                        <p></p>
+                        <a href="https://leetcode.com/u/Ragul-142/" aria-label="LeetCode profile" target="_blank"
+                            rel="noopener"><img src="LeetCode_Logo.png" alt="LeetCode" width="120" height="40"></a>
+                        <p></p>
+                        <a href="https://www.hackerrank.com/profile/ragulvenkat2001" aria-label="HackerRank profile" target="_blank"
+                            rel="noopener"><img src="Hackerrank_logo-dark.svg" alt="HackerRank" width="150" height="30"></a>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="main-content">
+
+            <!-- Hover detection area -->
+            <div class="nav-hover-area"></div>
+
+            <!-- Section Navigation -->
+            <nav class="section-nav" aria-label="Section navigation">
+                <a href="#summary" class="nav-item" aria-label="Go to Professional Summary">
+                    <span class="material-icons">person</span>
+                </a>
+                <a href="#skills" class="nav-item" aria-label="Go to Skills">
+                    <span class="material-icons">build</span>
+                </a>
+                <a href="#experience" class="nav-item" aria-label="Go to Work Experience">
+                    <span class="material-icons">work</span>
+                </a>
+                <a href="#education" class="nav-item" aria-label="Go to Education">
+                    <span class="material-icons">school</span>
+                </a>
+                <!-- <a href="#certifications" class="nav-item" aria-label="Go to Certifications">
+                    <span class="material-icons">verified</span>
+                </a> -->
+                <a href="#projects" class="nav-item" aria-label="Go to Projects">
+                    <span class="material-icons">laptop</span>
+                </a>
+            </nav>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">Professional Summary</h2>
+                <p class="description">
+                    Motivated professional seeking to excel in a highly competitive environment by leveraging strong
+                    teamwork and dedication. Committed to contributing effectively to organizational growth while
+                    advancing personal career development through continual learning and performance.
+                </p>
+            </section>
+
+            <section id="skills" aria-labelledby="skills-heading">
+                <h2 id="skills-heading">Skills</h2>
+                <ul class="skills-list">
+                    <li>Java</li>
+                    <li>SQL</li>
+                    <li>Git</li>
+                    <li>FHIR HL7</li>
+                    <li>Python</li>
+                    <li>REST APIs</li>
+                    <li>Docker</li>
+                    <li>Agile Methodologies</li>
+                </ul>
+            </section>
+
+            <section id="experience" aria-labelledby="work-experience-heading">
+                <h2 id="work-experience-heading">Work Experience</h2>
+
+                <div class="experience-item">
+                    <h3>Senior Software Engineer - Ideas2IT Technologies Services</h3>
+                    <p class="subheading">Chennai, Tamil Nadu | Apr 2025 - Present</p>
+                    <p class="description"> Worked on Healthcare projects like Patient Management System using Java Spring Boot and PostgreSQL and FHIR HL7 implementation.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Software Engineer - Ideas2IT Technologies Services</h3>
+                    <p class="subheading">Chennai, Tamil Nadu | May 2023 - Mar 2025</p>
+                    <p class="description"> Worked on project like Patient Management System using Java Spring Boot and PostgreSQL and learned about the basics of FHIR HL7 implementation.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Software Engineer Trainee - Ideas2IT Technologies Services</h3>
+                    <p class="subheading">Chennai, Tamil Nadu | Aug 2022 - Mpr 2023</p>
+                    <p class="description"> Trained in Java, SQL, Git. Created an mini project called "Bus Booking System" using Java Spring Boot and MySQL.</p>
+                </div>
+            </section>
+
+            <section id="education" aria-labelledby="education-heading">
+                <h2 id="education-heading">Education</h2>
+            
+                <div class="education-item">
+                    <h3>Bachelor of Engineering in Mechanical Engineering</h3>
+                    <p class="subheading">Government College of Engineering, Salem | 2018 - 2022</p>
+                    <p class="text-muted">First Class with Distinction - 9.01 CGPA</p>
+                </div>
+                <div class="education-item">
+                    <h3>Higher Secondary School</h3>
+                    <p class="subheading">Senthil Matric. Hr. Sec. School, Virudhachalam | 2018</p>
+                    <p class="text-muted">School First Rank - 92.75%</p>
+                </div>
+                <div class="education-item">
+                    <h3>Secondary School Leaving Certificate</h3>
+                    <p class="subheading">Senthil Matric. Hr. Sec. School, Virudhachalam | 2016</p>
+                    <p class="text-muted">School Topper - 95.2%</p>
+                </div>
+            
+            </section>
+
+            <!-- <section id="certifications" aria-labelledby="certifications-heading">
+                <h2 id="certifications-heading">Certifications</h2>
+
+                <div class="certification-item">
+                    <h3>Certified Kubernetes Administrator</h3>
+                    <p class="subheading">Cloud Native Computing Foundation | 2023</p>
+                </div>
+
+                <div class="certification-item">
+                    <h3>AWS Certified Solutions Architect</h3>
+                    <p class="subheading">Amazon Web Services | 2022</p>
+                </div>
+            </section> -->
+
+            <section id="projects" aria-labelledby="projects-heading">
+                <h2 id="projects-heading">Projects</h2>
+
+                <div class="project-item">
+                    <h3>MedtronicLabs | Spice</h3>
+                    <p class="description">Developed a Patient Management System using Java Spring Boot and PostgreSQL with FHIR HL7 implementation. It integrates with web application that allows user Management
+                         and Android application that allows users to manage patients and their medical history.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Auto-hide navigation when scrolling stops
+        let scrollTimeout;
+        const sectionNav = document.querySelector('.section-nav');
+
+        function showNavigation() {
+            sectionNav.classList.add('visible');
+        }
+
+        function hideNavigation() {
+            sectionNav.classList.remove('visible');
+        }
+
+        function handleScroll() {
+            // Show navigation when scrolling
+            showNavigation();
+
+            // Clear previous timeout
+            clearTimeout(scrollTimeout);
+
+            // Hide navigation after scrolling stops (1 second delay)
+            scrollTimeout = setTimeout(hideNavigation, 1000);
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Handle hover interactions
+        const navHoverArea = document.querySelector('.nav-hover-area');
+
+        // Show navigation on hover area or navigation hover
+        navHoverArea.addEventListener('mouseenter', showNavigation);
+        sectionNav.addEventListener('mouseenter', showNavigation);
+
+        // Hide navigation when leaving both areas
+        navHoverArea.addEventListener('mouseleave', hideNavigation);
+        sectionNav.addEventListener('mouseleave', hideNavigation);
+
+        // Scroll-based section highlighting
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Offset for better detection
+                const sectionHeight = section.offsetHeight;
+                const scrollPosition = window.scrollY;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            // Remove active class from all nav items
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Add active class to current section nav item
+            if (currentSection) {
+                const activeNavItem = document.querySelector(`[href="#${currentSection}"]`);
+                if (activeNavItem) {
+                    activeNavItem.classList.add('active');
+                }
+            }
+        }
+
+        // Add scroll listener for section highlighting
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Initialize active section on page load
+        document.addEventListener('DOMContentLoaded', updateActiveSection);
+
+        // Smooth scrolling for navigation items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>
